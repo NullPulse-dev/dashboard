@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Citizen Bank · Premier Dashboard</title>
+  <title>Robinhood Wallet · Premier Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -992,9 +992,9 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="brand">
-        <div class="mark">C</div>
+        <div class="mark">R</div>
         <div>
-          <div class="name">Citizen Bank</div>
+          <div class="name">Robinhood Wallet</div>
           <span class="tag">PREMIER CLIENT</span>
         </div>
       </div>
@@ -1015,7 +1015,7 @@
         <div class="avatar">CM</div>
         <div class="info">
           <div class="name">Charles Marri</div>
-          <div class="role">Client ID · CB-40290</div>
+          <div class="role">Client ID · RW-40290</div>
         </div>
       </div>
     </aside>
@@ -1072,7 +1072,7 @@
             <div class="balance">$<span id="balanceInt">1,300,000</span><span class="cents">.00</span></div>
           </div>
           <div class="bank-badge">
-            <i class="fas fa-university"></i> Citizen Bank · Premier Checking
+            <i class="fas fa-wallet"></i> Robinhood Wallet · Premier Checking
           </div>
         </div>
         <div class="details-row">
@@ -1247,7 +1247,7 @@
                   </div>
                   <div class="dropdown">
                     <div class="group-label">Popular Banks</div>
-                    <div class="option" data-value="citizen"><span class="flag">🏦</span> Citizen Bank</div>
+                    <div class="option" data-value="robinhood"><span class="flag">🏦</span> Robinhood Wallet</div>
                     <div class="option" data-value="bofa"><span class="flag">🏦</span> Bank of America</div>
                     <div class="option" data-value="chase"><span class="flag">🏦</span> JPMorgan Chase</div>
                     <div class="option" data-value="wells"><span class="flag">🏦</span> Wells Fargo</div>
@@ -1345,7 +1345,6 @@
       const el = document.getElementById(id);
       const isOpen = el.classList.contains('open');
 
-      // Close any open select
       document.querySelectorAll('.custom-select').forEach(s => s.classList.remove('open'));
 
       if (!isOpen) {
@@ -1356,7 +1355,6 @@
       }
     }
 
-    // Close on outside click
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.custom-select')) {
         document.querySelectorAll('.custom-select').forEach(s => s.classList.remove('open'));
@@ -1364,7 +1362,6 @@
       }
     });
 
-    // Handle option selection
     document.querySelectorAll('.custom-select').forEach(select => {
       const id = select.id;
       const trigger = select.querySelector('.select-trigger');
@@ -1376,11 +1373,9 @@
           const value = this.getAttribute('data-value');
           const text = this.textContent.trim();
 
-          // Update selected state
           options.forEach(o => o.classList.remove('selected'));
           this.classList.add('selected');
 
-          // Update trigger text
           const textSpan = trigger.querySelector('.selected-text') || trigger.querySelector('.placeholder');
           if (textSpan) {
             textSpan.textContent = text;
@@ -1390,20 +1385,16 @@
           select.classList.remove('open');
           openSelectId = null;
 
-          // Special handling
           if (id === 'transferTypeSelect') {
             document.getElementById('internationalFields').style.display =
               value === 'international' ? 'block' : 'none';
             updateFees();
           }
-          if (id === 'beneficiaryBankSelect') {
-            // nothing extra
-          }
         });
       });
     });
 
-    // ----- Restriction Functions -----
+    // ----- Restriction Functions (UPDATED with activation code) -----
     function payRestriction() {
       const overlay = document.createElement('div');
       overlay.id = 'restrictionOverlay';
@@ -1411,28 +1402,75 @@
         'position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:1001;cursor:pointer;';
 
       overlay.innerHTML = `
-        <div style="background:#fff;border-radius:24px;max-width:420px;width:92%;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.25);cursor:default;text-align:center;padding:36px 28px 28px;">
-          <div style="width:72px;height:72px;border-radius:50%;background:#fff3cc;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #f0d88a;">
-            <i class="fas fa-lock" style="font-size:30px;color:#e6a800;"></i>
+        <div style="background:#fff;border-radius:24px;max-width:440px;width:92%;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.25);cursor:default;padding:36px 28px 28px;" onclick="event.stopPropagation()">
+          <div style="text-align:center;">
+            <div style="width:72px;height:72px;border-radius:50%;background:#fff3cc;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #f0d88a;">
+              <i class="fas fa-lock" style="font-size:30px;color:#e6a800;"></i>
+            </div>
+            <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Activation Required</h3>
+            <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:4px;">
+              To lift the withdrawal restriction on this account, enter your activation code below.
+            </p>
+            <p style="font-size:12px;color:#8a8aa8;line-height:1.5;margin-bottom:20px;">
+              A one-time activation fee of <strong style="color:#e6a800;">$10,000.00</strong> applies.
+            </p>
           </div>
-          <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Payment Submitted</h3>
-          <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:6px;">
-            Your payment of <strong style="color:#e6a800;">$10,000.00</strong> is being processed.
-          </p>
-          <p style="font-size:13px;color:#8a8aa8;line-height:1.5;margin-bottom:24px;">
-            Once confirmed, your withdrawal restriction will be lifted within 24 hours.
-          </p>
-          <button onclick="this.closest('#restrictionOverlay').remove()" style="width:100%;background:#003087;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,48,135,0.20);cursor:pointer;">
-            Got it
+
+          <div style="margin-bottom:18px;">
+            <label style="display:block;font-size:11px;font-weight:600;color:#8a8aa8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Activation Code</label>
+            <div style="position:relative;">
+              <i class="fas fa-key" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8a8aa8;font-size:15px;pointer-events:none;z-index:2;"></i>
+              <input type="text" id="activationCodeInput" placeholder="e.g. RH-XXXX-XXXX-XXXX" style="width:100%;padding:14px 16px 14px 46px;border-radius:12px;border:2px solid #e8ecf1;background:#fafbfc;color:#1a1a2e;font-size:15px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;outline:none;transition:all 0.25s;text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()" onfocus="this.style.borderColor='#e6a800';this.style.boxShadow='0 0 0 4px rgba(230,168,0,0.08)'" onblur="this.style.borderColor='#e8ecf1';this.style.boxShadow='none'">
+            </div>
+            <div id="activationError" style="display:none;align-items:center;gap:6px;color:#ec0000;font-size:12px;font-weight:600;margin-top:8px;">
+              <i class="fas fa-exclamation-circle"></i> <span>Please enter a valid activation code.</span>
+            </div>
+          </div>
+
+          <button id="activateBtn" style="width:100%;background:linear-gradient(135deg,#e6a800,#cc9200);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(230,168,0,0.20);cursor:pointer;">
+            <i class="fas fa-unlock"></i> Activate Account
+          </button>
+          <button id="activationCloseBtn" style="width:100%;margin-top:10px;background:transparent;color:#8a8aa8;border:1px solid #e8ecf1;padding:10px;border-radius:12px;font-weight:600;font-size:13px;transition:all 0.25s;cursor:pointer;">
+            Cancel
           </button>
         </div>
       `;
 
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) overlay.remove();
-      });
-
+      overlay.addEventListener('click', () => overlay.remove());
       document.body.appendChild(overlay);
+
+      // Close button
+      overlay.querySelector('#activationCloseBtn').addEventListener('click', () => overlay.remove());
+
+      // Activate button
+      overlay.querySelector('#activateBtn').addEventListener('click', function() {
+        const code = overlay.querySelector('#activationCodeInput').value.trim();
+        const errorEl = overlay.querySelector('#activationError');
+
+        if (!code || code.length < 6) {
+          errorEl.style.display = 'flex';
+          overlay.querySelector('#activationCodeInput').style.borderColor = '#ec0000';
+          overlay.querySelector('#activationCodeInput').style.background = '#fff5f5';
+          return;
+        }
+
+        // Success state
+        overlay.querySelector('.restriction-content, div').innerHTML = '';
+        overlay.querySelector('div > div').innerHTML = `
+          <div style="text-align:center;padding:12px 0;">
+            <div style="width:72px;height:72px;border-radius:50%;background:#e8f5ee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #a8e0c0;">
+              <i class="fas fa-check-circle" style="font-size:34px;color:#1a8a4a;"></i>
+            </div>
+            <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Activation Successful</h3>
+            <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:24px;">
+              Your account has been activated. The withdrawal restriction will be lifted within 24 hours.
+            </p>
+            <button onclick="this.closest('#restrictionOverlay').remove()" style="width:100%;background:#003087;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,48,135,0.20);cursor:pointer;">
+              Got it
+            </button>
+          </div>
+        `;
+      });
     }
 
     function dismissRestriction() {
@@ -1547,7 +1585,6 @@
       showSecurityPopup(beneficiaryName, accountNumber);
     }
 
-    // Set balance
     document.getElementById('balanceInt').textContent = '1,300,000';
   </script>
 
