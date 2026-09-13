@@ -22,19 +22,10 @@
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
     }
-    .serif {
-      font-family: 'Source Serif 4', serif;
-    }
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    ul {
-      list-style: none;
-    }
+    .serif { font-family: 'Source Serif 4', serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
     button {
       font-family: inherit;
       cursor: pointer;
@@ -68,9 +59,7 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-    .top-bar .left a:hover {
-      color: #fff;
-    }
+    .top-bar .left a:hover { color: #fff; }
     .top-bar .right {
       display: flex;
       gap: 20px;
@@ -162,12 +151,8 @@
       border-radius: 4px;
       transition: width 0.25s ease;
     }
-    .nav-links li:hover {
-      color: #003087;
-    }
-    .nav-links li:hover::after {
-      width: 100%;
-    }
+    .nav-links li:hover { color: #003087; }
+    .nav-links li:hover::after { width: 100%; }
 
     .nav-right {
       display: flex;
@@ -234,7 +219,7 @@
     .mobile-menu li:hover { color: #003087; }
     .mobile-menu li:last-child { border-bottom: none; }
 
-    /* ----- hero ----- */
+    /* ----- hero (UPDATED - no balance display) ----- */
     .hero {
       background: linear-gradient(165deg, #003087 0%, #001a4d 100%);
       color: #fff;
@@ -284,9 +269,7 @@
       margin-bottom: 22px;
       backdrop-filter: blur(4px);
     }
-    .hero-text .tag i {
-      color: #ffcc00;
-    }
+    .hero-text .tag i { color: #ffcc00; }
     .hero-text h1 {
       font-family: 'Source Serif 4', serif;
       font-size: 52px;
@@ -295,9 +278,7 @@
       letter-spacing: -1.2px;
       margin-bottom: 20px;
     }
-    .hero-text h1 span {
-      color: #ffcc00;
-    }
+    .hero-text h1 span { color: #ffcc00; }
     .hero-text p {
       font-size: 18px;
       color: rgba(255, 255, 255, 0.80);
@@ -363,65 +344,52 @@
       font-weight: 500;
     }
 
-    /* ----- hero card visual ----- */
-    .hero-visual {
+    /* ----- hero feature cards (NEW - replaces balance) ----- */
+    .hero-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-card {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 28px;
-      padding: 36px 32px;
+      border-radius: 18px;
+      padding: 24px 26px;
       backdrop-filter: blur(8px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.20);
-    }
-    .hero-visual .card-label {
-      font-size: 11px;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.55);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .hero-visual .card-balance {
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 4px;
-    }
-    .hero-visual .card-sub {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.60);
-      margin-bottom: 24px;
-    }
-    .hero-visual .mini-stat {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .hero-visual .mini-stat .left {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.75);
+      gap: 18px;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
-    .hero-visual .mini-stat .left i {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.10);
+    .feature-card:hover {
+      transform: translateX(6px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 204, 0, 0.30);
+    }
+    .feature-card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255, 204, 0, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 22px;
       color: #ffcc00;
+      flex-shrink: 0;
     }
-    .hero-visual .mini-stat .value {
+    .feature-card .content h4 {
+      font-size: 16px;
       font-weight: 700;
-      font-size: 14px;
+      margin-bottom: 2px;
       color: #fff;
     }
-    .hero-visual .mini-stat .value.up { color: #7ee2a8; }
-    .hero-visual .mini-stat .value.down { color: #ff9aa8; }
+    .feature-card .content p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+    }
 
     /* ----- trust bar ----- */
     .trust-bar {
@@ -449,9 +417,7 @@
     }
 
     /* ----- quick actions ----- */
-    .quick-section {
-      padding: 48px 0 24px;
-    }
+    .quick-section { padding: 48px 0 24px; }
     .quick-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -502,9 +468,7 @@
     }
 
     /* ----- products ----- */
-    .products-section {
-      padding: 48px 0 56px;
-    }
+    .products-section { padding: 48px 0 56px; }
     .section-head {
       text-align: center;
       margin-bottom: 40px;
@@ -574,14 +538,10 @@
       gap: 8px;
       transition: gap 0.2s;
     }
-    .product-card a:hover {
-      gap: 14px;
-    }
+    .product-card a:hover { gap: 14px; }
 
     /* ----- app promo ----- */
-    .app-promo-section {
-      padding: 20px 0 60px;
-    }
+    .app-promo-section { padding: 20px 0 60px; }
     .app-promo {
       background: linear-gradient(135deg, #001a4d, #003087);
       border-radius: 24px;
@@ -629,9 +589,7 @@
     }
 
     /* ----- login section ----- */
-    .login-section {
-      padding: 20px 0 70px;
-    }
+    .login-section { padding: 20px 0 70px; }
     .login-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -669,9 +627,7 @@
       align-items: center;
       gap: 8px;
     }
-    .login-badges span i {
-      color: #003087;
-    }
+    .login-badges span i { color: #003087; }
 
     /* ----- login card ----- */
     .login-card {
@@ -727,6 +683,8 @@
       transform: translateY(-50%);
       color: #8a8aa8;
       font-size: 15px;
+      pointer-events: none;
+      z-index: 2;
     }
     .input-group input {
       width: 100%;
@@ -751,7 +709,11 @@
       right: 16px;
       cursor: pointer;
       color: #8a8aa8;
+      pointer-events: auto;
+      z-index: 3;
+      transition: color 0.2s;
     }
+    .input-group .eye:hover { color: #003087; }
 
     .input-group.has-error input {
       border-color: #ec0000;
@@ -938,7 +900,7 @@
       .hero-ctas { justify-content: center; }
       .hero-stats { justify-content: center; }
       .hero-text h1 { font-size: 40px; }
-      .hero-visual { max-width: 500px; margin: 0 auto; }
+      .hero-features { max-width: 500px; margin: 0 auto; }
       .quick-grid { grid-template-columns: repeat(2, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .login-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -965,8 +927,7 @@
       .hero-text h1 { font-size: 28px; }
       .hero-stats { gap: 24px; }
       .hero-stats .num { font-size: 24px; }
-      .hero-visual { padding: 24px 20px; }
-      .hero-visual .card-balance { font-size: 30px; }
+      .feature-card { padding: 18px 20px; }
 
       .quick-grid { grid-template-columns: 1fr; gap: 12px; }
       .products-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -1044,7 +1005,7 @@
     <li>Insurance</li>
   </ul>
 
-  <!-- Hero -->
+  <!-- Hero (UPDATED) -->
   <section class="hero">
     <div class="container">
       <div class="hero-text">
@@ -1061,22 +1022,29 @@
           <div><div class="num">4.9/5</div><div class="label">Customer rating</div></div>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="card-label">Premier Checking</div>
-        <div class="card-balance">$1,300,000.00</div>
-        <div class="card-sub">Account ····5575 · Citizen Bank</div>
 
-        <div class="mini-stat">
-          <div class="left"><i class="fas fa-arrow-up"></i> Income this month</div>
-          <div class="value up">+$120,000.00</div>
+      <!-- Feature cards (replaces balance card) -->
+      <div class="hero-features">
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="content">
+            <h4>Bank-grade security</h4>
+            <p>256-bit encryption and real-time fraud monitoring on every transaction.</p>
+          </div>
         </div>
-        <div class="mini-stat">
-          <div class="left"><i class="fas fa-arrow-down"></i> Spending this month</div>
-          <div class="value down">-$24,300.00</div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-bolt"></i></div>
+          <div class="content">
+            <h4>Instant transfers</h4>
+            <p>Send and receive money in seconds — domestic or international.</p>
+          </div>
         </div>
-        <div class="mini-stat">
-          <div class="left"><i class="fas fa-shield-alt"></i> Security status</div>
-          <div class="value up">Active</div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-chart-line"></i></div>
+          <div class="content">
+            <h4>Smart insights</h4>
+            <p>Personalized spending analytics and savings recommendations.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1272,7 +1240,7 @@
   </footer>
 
   <script>
-    // Toggle password visibility
+    // Toggle password visibility (UPDATED - now works properly)
     function togglePassword() {
       const pw = document.getElementById('password');
       const icon = document.getElementById('eyeIcon');
