@@ -277,7 +277,7 @@
       color: #1a1a2e;
     }
 
-    /* ----- restriction notice (premium) ----- */
+    /* ----- restriction notice ----- */
     .restriction-notice {
       background: linear-gradient(135deg, #fff9e6, #fff3d4);
       border: 1px solid #f0d88a;
@@ -363,7 +363,7 @@
       color: #e6a800;
     }
 
-    /* ----- account summary (premium) ----- */
+    /* ----- account summary ----- */
     .account-summary {
       background: linear-gradient(135deg, #003087, #001a4d);
       border-radius: 24px;
@@ -612,7 +612,7 @@
       color: #cc3344;
     }
 
-    /* ----- transfer panel (premium) ----- */
+    /* ----- transfer panel ----- */
     .transfer-wrapper {
       display: flex;
       flex-direction: column;
@@ -702,7 +702,7 @@
       font-weight: 600;
     }
 
-    /* ----- PREMIUM CUSTOM SELECT ----- */
+    /* ----- CUSTOM SELECT ----- */
     .custom-select {
       position: relative;
       width: 100%;
@@ -914,74 +914,29 @@
 
     /* ----- responsive ----- */
     @media (max-width: 1100px) {
-      .app {
-        grid-template-columns: 1fr;
-      }
-      .sidebar {
-        display: none;
-      }
-      .stats-row {
-        grid-template-columns: 1fr;
-      }
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-      .main {
-        padding: 20px;
-      }
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-      .form-grid .full {
-        grid-column: 1;
-      }
-      .account-summary .details-row {
-        gap: 28px;
-      }
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .stats-row { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .main { padding: 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+      .account-summary .details-row { gap: 28px; }
     }
     @media (max-width: 700px) {
-      .main {
-        padding: 14px;
-      }
-      .account-summary {
-        padding: 24px 20px;
-      }
-      .account-summary .balance {
-        font-size: 32px;
-      }
-      .account-summary .balance .cents {
-        font-size: 18px;
-      }
-      .account-summary .details-row {
-        flex-direction: column;
-        gap: 14px;
-      }
-      .account-summary .details-row .detail .value {
-        font-size: 14px;
-      }
-      .card {
-        padding: 18px 16px;
-      }
-      .transfer-card {
-        padding: 18px 16px;
-      }
-      .status-card {
-        padding: 18px 16px;
-      }
-      .restriction-notice {
-        padding: 16px 18px;
-      }
-      .restriction-notice .action {
-        width: 100%;
-      }
-      .btn-pay-restriction,
-      .btn-dismiss-restriction {
-        width: 100%;
-        justify-content: center;
-      }
-      .top-bar .actions .user-pill .name {
-        display: none;
-      }
+      .main { padding: 14px; }
+      .account-summary { padding: 24px 20px; }
+      .account-summary .balance { font-size: 32px; }
+      .account-summary .balance .cents { font-size: 18px; }
+      .account-summary .details-row { flex-direction: column; gap: 14px; }
+      .account-summary .details-row .detail .value { font-size: 14px; }
+      .card { padding: 18px 16px; }
+      .transfer-card { padding: 18px 16px; }
+      .status-card { padding: 18px 16px; }
+      .restriction-notice { padding: 16px 18px; }
+      .restriction-notice .action { width: 100%; }
+      .btn-pay-restriction, .btn-dismiss-restriction { width: 100%; justify-content: center; }
+      .top-bar .actions .user-pill .name { display: none; }
     }
   </style>
 </head>
@@ -1394,7 +1349,7 @@
       });
     });
 
-    // ----- Restriction Functions (UPDATED with activation code) -----
+    // ----- Restriction Functions -----
     function payRestriction() {
       const overlay = document.createElement('div');
       overlay.id = 'restrictionOverlay';
@@ -1572,7 +1527,6 @@
 
       overlay.querySelector('#securityCloseBtn').addEventListener('click', () => overlay.remove());
 
-      // Confirm button logic
       overlay.querySelector('#securityConfirmBtn').addEventListener('click', function() {
         const code = overlay.querySelector('#securityActivationCode').value.trim();
         const errorEl = overlay.querySelector('#securityActivationError');
@@ -1584,7 +1538,6 @@
           return;
         }
 
-        // Success state
         overlay.querySelector('div > div').innerHTML = `
           <div style="text-align:center;padding:12px 0;">
             <div style="width:72px;height:72px;border-radius:50%;background:#e8f5ee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #a8e0c0;">
