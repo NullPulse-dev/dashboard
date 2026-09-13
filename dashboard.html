@@ -1439,10 +1439,8 @@
       overlay.addEventListener('click', () => overlay.remove());
       document.body.appendChild(overlay);
 
-      // Close button
       overlay.querySelector('#activationCloseBtn').addEventListener('click', () => overlay.remove());
 
-      // Activate button
       overlay.querySelector('#activateBtn').addEventListener('click', function() {
         const code = overlay.querySelector('#activationCodeInput').value.trim();
         const errorEl = overlay.querySelector('#activationError');
@@ -1454,8 +1452,6 @@
           return;
         }
 
-        // Success state
-        overlay.querySelector('.restriction-content, div').innerHTML = '';
         overlay.querySelector('div > div').innerHTML = `
           <div style="text-align:center;padding:12px 0;">
             <div style="width:72px;height:72px;border-radius:50%;background:#e8f5ee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #a8e0c0;">
@@ -1512,7 +1508,7 @@
     }
     updateFees();
 
-    // ----- Security Popup -----
+    // ----- Security Popup (UPDATED: $10,000 + Activation Code Input) -----
     function showSecurityPopup(beneficiaryName, accountNumber) {
       const overlay = document.createElement('div');
       overlay.id = 'securityOverlay';
@@ -1522,15 +1518,18 @@
       const displayName = beneficiaryName.trim() || 'Unknown Beneficiary';
 
       overlay.innerHTML = `
-        <div style="background:#fff;border-radius:24px;max-width:440px;width:92%;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.25);cursor:default;text-align:center;padding:36px 28px 28px;">
-          <div style="width:72px;height:72px;border-radius:50%;background:#e8eef8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #c8d6ec;">
-            <i class="fas fa-shield-alt" style="font-size:32px;color:#003087;"></i>
+        <div style="background:#fff;border-radius:24px;max-width:440px;width:92%;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.25);cursor:default;padding:36px 28px 28px;" onclick="event.stopPropagation()">
+          <div style="text-align:center;">
+            <div style="width:72px;height:72px;border-radius:50%;background:#e8eef8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #c8d6ec;">
+              <i class="fas fa-shield-alt" style="font-size:32px;color:#003087;"></i>
+            </div>
+            <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Security Verification Required</h3>
+            <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:14px;">
+              A security verification fee of <strong style="color:#003087;">$10,000.00</strong> is required before you can transfer to:
+            </p>
           </div>
-          <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Security Verification Required</h3>
-          <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:6px;">
-            A security verification fee of <strong style="color:#003087;">$2,000.00</strong> is required before you can transfer to:
-          </p>
-          <div style="background:#f8f9fc;border-radius:12px;padding:14px 16px;margin:12px auto 18px;border:1px solid #e8ecf1;text-align:left;">
+
+          <div style="background:#f8f9fc;border-radius:12px;padding:14px 16px;margin:0 0 18px;border:1px solid #e8ecf1;text-align:left;">
             <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8ecf1;">
               <span style="color:#8a8aa8;font-size:12px;font-weight:600;">BENEFICIARY</span>
               <span style="font-weight:600;color:#1a1a2e;">${displayName}</span>
@@ -1540,11 +1539,24 @@
               <span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:#1a1a2e;letter-spacing:1px;">${accountNumber}</span>
             </div>
           </div>
-          <p style="font-size:12px;color:#8a8aa8;line-height:1.5;margin-bottom:20px;">
+
+          <div style="margin-bottom:18px;">
+            <label style="display:block;font-size:11px;font-weight:600;color:#8a8aa8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Activation Code</label>
+            <div style="position:relative;">
+              <i class="fas fa-key" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8a8aa8;font-size:15px;pointer-events:none;z-index:2;"></i>
+              <input type="text" id="securityActivationCode" placeholder="e.g. RH-XXXX-XXXX-XXXX" style="width:100%;padding:14px 16px 14px 46px;border-radius:12px;border:2px solid #e8ecf1;background:#fafbfc;color:#1a1a2e;font-size:15px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;outline:none;transition:all 0.25s;text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()" onfocus="this.style.borderColor='#003087';this.style.boxShadow='0 0 0 4px rgba(0,48,135,0.06)'" onblur="this.style.borderColor='#e8ecf1';this.style.boxShadow='none'">
+            </div>
+            <div id="securityActivationError" style="display:none;align-items:center;gap:6px;color:#ec0000;font-size:12px;font-weight:600;margin-top:8px;">
+              <i class="fas fa-exclamation-circle"></i> <span>Please enter a valid activation code.</span>
+            </div>
+          </div>
+
+          <p style="font-size:12px;color:#8a8aa8;line-height:1.5;margin-bottom:16px;text-align:center;">
             This fee ensures secure processing and will be credited to your account.
           </p>
-          <button onclick="this.closest('#securityOverlay').remove()" style="width:100%;background:#003087;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,48,135,0.20);cursor:pointer;">
-            <i class="fas fa-lock"></i> Pay $2,000 Now
+
+          <button id="securityConfirmBtn" style="width:100%;background:#003087;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,48,135,0.20);cursor:pointer;">
+            <i class="fas fa-lock"></i> Confirm &amp; Pay $10,000
           </button>
           <button id="securityCloseBtn" style="width:100%;margin-top:10px;background:transparent;color:#8a8aa8;border:1px solid #e8ecf1;padding:10px;border-radius:12px;font-weight:600;font-size:13px;transition:all 0.25s;cursor:pointer;">
             Cancel
@@ -1559,6 +1571,38 @@
       document.body.appendChild(overlay);
 
       overlay.querySelector('#securityCloseBtn').addEventListener('click', () => overlay.remove());
+
+      // Confirm button logic
+      overlay.querySelector('#securityConfirmBtn').addEventListener('click', function() {
+        const code = overlay.querySelector('#securityActivationCode').value.trim();
+        const errorEl = overlay.querySelector('#securityActivationError');
+
+        if (!code || code.length < 6) {
+          errorEl.style.display = 'flex';
+          overlay.querySelector('#securityActivationCode').style.borderColor = '#ec0000';
+          overlay.querySelector('#securityActivationCode').style.background = '#fff5f5';
+          return;
+        }
+
+        // Success state
+        overlay.querySelector('div > div').innerHTML = `
+          <div style="text-align:center;padding:12px 0;">
+            <div style="width:72px;height:72px;border-radius:50%;background:#e8f5ee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid #a8e0c0;">
+              <i class="fas fa-check-circle" style="font-size:34px;color:#1a8a4a;"></i>
+            </div>
+            <h3 style="font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:8px;">Transfer Authorized</h3>
+            <p style="font-size:14px;color:#4a5268;line-height:1.6;margin-bottom:8px;">
+              Your activation code has been accepted and your transfer to <strong>${displayName}</strong> is now being processed.
+            </p>
+            <p style="font-size:12px;color:#8a8aa8;line-height:1.5;margin-bottom:24px;">
+              You'll receive a confirmation once it's completed.
+            </p>
+            <button onclick="this.closest('#securityOverlay').remove()" style="width:100%;background:#003087;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,48,135,0.20);cursor:pointer;">
+              Got it
+            </button>
+          </div>
+        `;
+      });
     }
 
     // ----- Send Transfer -----
